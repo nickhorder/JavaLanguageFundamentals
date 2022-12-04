@@ -1,0 +1,64 @@
+package com.experian.dcm.pluralsight.nickhorder.gettingstartedinjava11;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import static java.lang.System.out;
+
+public class InflationCalculator {
+    public static void main(String[] args)
+            throws IOException {
+        BufferedReader reader = new BufferedReader(
+                new InputStreamReader(System.in));
+/*
+    Simple program to calculate the effects of inflation
+
+ */
+        out.println("What's the cost of a dozen eggs right now?");
+        double eggsNow = Double.parseDouble(reader.readLine());
+
+        out.println("What's the current inflation rate?");
+        double inflationNow = Double.parseDouble(reader.readLine());
+
+        out.println("What are you getting on your savings? Just put a number" +
+                " because I haven't learn to dynamically handle your %.");
+        double savingRateNow = Double.parseDouble(reader.readLine());
+
+        out.println("And how much do you have in savings?");
+        double savingsBalNow = Double.parseDouble(reader.readLine());
+
+        //Call calculateCurrentPos and store return as currentPos
+        double currentPos = calculateCurrentPos(eggsNow,savingRateNow,
+                savingsBalNow,inflationNow);
+
+        //Call calculateInflation and store return as timeToEmigrate
+        double timeToEmigrate = calculateInflation(eggsNow,
+                inflationNow,savingRateNow,savingsBalNow);
+
+        out.println("Within inflation at 0%, in a years time you would be " +
+                "able to buy " + currentPos + " eggs with your savings." + "\n" +
+                "With the inflation you forecast, that will change to " + timeToEmigrate + " eggs.");
+    }
+    //Start of calculateCurrentPos Method
+    static double calculateCurrentPos ( double eggsNow,
+                                        double savingRateNow,
+                                        double savingsBalNow,
+                                        double inflationNow){
+        inflationNow = 0;
+        double currentPos = savingsBalNow * (1+(savingRateNow/100)) / eggsNow;
+        return currentPos;
+    }
+
+    //Start of calculateInflation Method
+    static double calculateInflation ( double eggsNow,
+                                       double inflationNow,
+                                       double savingRateNow,
+                                       double savingsNow){
+
+        double savingRateMultiplier = (1+(savingRateNow/100));
+        double inflationNowMultiplier = (1+(inflationNow/100));
+        double realReturn = (savingRateNow - inflationNow) / 100;
+        return  (savingsNow * (1 + realReturn)) / eggsNow ;
+    }
+
+}

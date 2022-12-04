@@ -1,0 +1,22 @@
+package com.experian.dcm.pluralsight.nickhorder.gettingstartedinjava11;
+
+public class StringBuilder {
+    public static void main(String[] args) {
+        String location = "Singapore";
+        int flightNumber = 383;
+        java.lang.StringBuilder sb = new java.lang.StringBuilder(40);
+        sb.append("I flew to ");
+        sb.append(location);
+        sb.append(" on Flight Number ");
+        sb.append(flightNumber);
+        String message1 = sb.toString(); //I flew to Singapore on Flight Number 383
+
+        String time = "09:00";
+        int pos = sb.indexOf(" on");
+        sb.insert(pos, " at ");
+        sb.insert(pos + 4, time);
+        message1 = sb.toString(); //I flew to Singapore at 09:00 on Flight Number 383
+
+        System.out.println(message1);
+    }
+}

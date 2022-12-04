@@ -1,0 +1,180 @@
+package com.experian.dcm.pluralsight.nickhorder.gettingstartedinjava11;
+
+public class Variables {
+    public static void main(String[] args) {
+
+        int myVar = 50;
+        int anotherVar = 100;
+        //    Primitive types are stored by value. That means each variable gets its own
+        //     independent copy of each value.
+
+
+        myVar = anotherVar; //This replaces existing 50 with 100
+        System.out.println(myVar + " Is the magic number");
+
+        int firstValue = 100;  // firstValue is 100
+        int otherValue = firstValue; // otherValue is 100, firstValue is 100
+        firstValue = 50; // firstValue is 50, otherValue is 100
+        otherValue = 70; // firstValue is 50, otherValue is 70
+        System.out.println("firstValue=" + firstValue + " " +
+                "otherValue=" + otherValue);
+        // com.experian.dcm.pluralsight.nickhorder.Variables can be declared final:
+        final int someVariable = 100;
+        // helps avoid inadvertent variable change.
+
+        /* PRIMITIVE DATA TYPES
+
+         The foundation of all other types. There are four categories, integer,
+         Floating Point, Character, Boolean.
+
+        - Integer Types
+        1. Byte: 8 bits. Min value -128, Max 127. Literal Form 0
+        2. Short: 16 bits. Min value -32768, Max 32767. LF 0
+        3. Int: 32 bits. Min -21474883648, Max 21474883647. LF 0
+        4  Long: 64 bits. Min -2e63, Max 2e63-1. LF L
+
+        - Floating Point
+        Store fractional portion - i.e decimal values.
+        1. Float: 32 bits. Min 1.4x10e-45, Max 3.4x10e38 LF f
+        2. Double: 64 bits. Min 4.9x10e-324, Max 1.7x10e308. LF none or d
+
+        -Character
+        1. Char: Single Unicode character. Not a string.
+        Literal values placed between single quotes.
+        We can use Unicode code points - storing values not on your keyboard.
+        The numeric representation of a numeric character.
+        Backslash with u followed by 4-digit hex value.
+        Example is char accentedU = '\u00DA';
+        This would give you an upper case U with an accent.
+
+        - Boolean
+        1. Stores true/false values
+        boolean iLoveJava = true;
+*/
+        /*
+    ARITHMETIC OPERATORS
+    1. Basic. Adding, multiplying, dividing. No impact on values used. You simply get a
+    result.
+    2. Prefix/postfix. Increase or decrease a value. It replaces the variable's original
+    value.
+    3. Compound Assignment. These perform calculation on a value, and then replace the
+    original value with the result of the calculation.
+
+*/
+
+        double thirteen = 13d;
+        double two = 2d;
+        double calc1 = (thirteen * two);
+        System.out.println("Calculation result is " + calc1);
+
+    /*
+    PREFIX AND POSTFIX OPERATORS
+    ++ increments value by 1
+    -- decrement value by 1
+
+    Order matters. If you place the operator before a variable, it's prefix. If
+    done after, it's postfix.
+     */
+        //   Prefix
+        int someValue = 5;
+        System.out.println("Prefix example=" + ++someValue); //writes out 6
+        // someValue is now "updated" to be 6.
+        //    Postfix
+        int someOtherValue = 5;
+        System.out.println("Postfix writeout1=" + someOtherValue++); //writes out 5
+        System.out.println("Postfix writeout2=" + someOtherValue); //writes out 6
+    /*
+    COMPOUND ASSIGNMENT OPERATORS
+    Combine an operation and assignment.
+    - Apply right side value to left side
+    - Store result in variable on left side
+    Available for 5 basic math operations:
+   -  += -= *= /= %=
+
+    */
+        int myValue = 50;
+        myValue -= 5; // this takes 50, subtracts 5 from it, and stores result
+        // back into myValue.
+        System.out.println("Compound Assignment1:" + myValue); // writes 45
+
+        int myOtherValue = 100;
+        int val1 = 5;
+        int val2 = 10;
+        myOtherValue /= val1 * val2;
+        // The compiler solves the "right side" first. So it will calculator
+        // val1 * val2 (50). It then does the "left side". 100/50
+        System.out.println("Compound Assignment2: " + myOtherValue); //writes 2
+    /*
+    OPERATOR PRECEDENCE
+    There is an order in which the compiler will do calculations. In order of first
+    to last, this is:
+    - Postfix ++X or --X
+    - Prefix ++X or --X
+    - Multiplicative * or / or %
+    - Additive - or +
+
+     */
+        int valA = 21;
+        int valB = 6;
+        int valC = 3;
+        int valD = 1;
+
+        int result1 = valA - valB / valC;
+
+        int result2 = (valA - valB) / valC;
+
+        System.out.println("Example1a=" + result1); //gives 19, because division (6/3) done first. 21 minus 2
+        System.out.println("Example1b=" + result2); //gives 5, because parenthesis override. 21-6. 15 div 3.
+
+
+        int result3 = valA / valC * valD + valB;
+        int result4 = valA / (valC * (valD + valB));
+        System.out.println("Example2a=" + result3);
+        //gives 13, because division done first over multiply (left to right) both in multiplicative group.
+        System.out.println("Example2b=" + result4);
+        //gives 1. Innermost parenthesis done first. Gives 7. Out parenthesis 3 * 7.
+        // then finally the division by ValA = 21/21=1.
+/*
+        DATA TYPE CONVERSION
+        Implicit type conversion. Where conversion is automatically performed by the
+        compiler.
+        Explicit conversion is where we tell the compiler what conversion we want.
+        This is done by a cast operator.
+
+        There are only certain types the compiler can do implicitly. Widening conversions
+        is one example.
+        Mixed integer - the compiler will take the largest sized integer. For example if you
+        had a mixture of Short and Int, it will convert the Short values to Int values.
+        Mixed Floating Point - will use Double (again the largest type)
+        Mixed Integer/Floating Point - Largest Floating Point in the equation.
+
+        With Explicit Type Conversion, you can perform widening or narrowing conversions.
+        Beware - you could do something like convert a Long into a Short, and the original
+        value won't fit into that narrower data type.
+        Next thing to be wary of is converting a FP to Int. Any fractional element will be
+        discarded.
+        Integer to Floating Point. Precision may be lost. 100000 converted to Floating Point
+        may be 99999.9999 and that's just a nuance of how FP values are stored.
+
+ */
+        float floatVal = 1.25f;
+        double doubleVal = 4.0d;
+        byte byteVal = 7;
+        short shortVal = 7;
+        long longVal = 5;
+        short result5 = byteVal;
+        System.out.println("Success"); //short is bigger than byte, so compiler ok (widening conversion)
+        //short result6 = longVal; narrowing - short is smaller than long, so compiler will warn
+        // Explicit cast of long to be short works:
+        short result7 = (short) longVal;
+        System.out.println("Success");
+        //This is valid:
+        short result8 = (short) (byteVal - longVal);
+        //This is valid, but note any decimal points would be lost:
+        long result9 = (long) (longVal - floatVal);
+        System.out.println("We've Lost the Decimals.. " + result9); //3
+        // So a better option may be result as Float.
+        float result10 = longVal - floatVal;
+        System.out.println("Decimals are back: " + result10); //3.75
+    }
+}

@@ -1,0 +1,51 @@
+package com.experian.dcm.pluralsight.nickhorder.gettingstartedinjava11;
+
+public class Methods {
+    public static void main(String[] args) {
+/*
+Methods make our code more maintainable, and easier to add to.
+-Enables creation of reusable code blocks
+-Can receive data
+-Can return data
+Method/Function refers to the same thing.
+Naming convention is the same as variables (Camel Case)
+Each method consists of zero or more statements. The method body is always enclosed
+in brackets.
+It has to have a return type. Unless it doesn't return something - in which case void
+return-type name (typed-parameter-list) { statements }
+
+Parameters are passed "by value" so the method receives a copy of the original value,
+It doesn't actually operate on that value.
+Changes within a method to a parameter, are not visible outside the method.
+
+There are three reasons why a method might end.
+1. End of Method - no more code in method
+2. Return statement - explicit exit method
+3. Error occurs, method abruptly ends - exception.
+
+ */
+        System.out.println("Before method call");
+        doSomething();                           //Call the method
+        System.out.println("After method call");
+
+        showSum(7.5,1.4,0);
+        System.out.println("Back from showSum");
+    }
+    static void doSomething() {
+        System.out.println("Inside method");
+    }
+
+    static void showSum(double x, double y, int count) {
+        if(count < 1){
+            System.out.println("showSum not ran");
+            return;
+        }
+        double sum = x + y;
+        for(int i = 0; i < count; i++)
+            System.out.println(sum);
+        return;
+    }
+
+
+}
+

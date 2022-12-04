@@ -1,0 +1,63 @@
+package com.experian.dcm.pluralsight.nickhorder.gettingstartedinjava11;
+
+   /*
+    Strings are a sequence of Unicode characters. UTF-16 format
+    String variables do not directly hold the string value. They hold a reference to the instance
+    of the String. I.e a string of "message" doesn't hold the value, it knows how to find the value.
+    Changes in the value create a new instance of the string. "Immutable"
+    */
+
+public class WorkingWithStrings {
+    public static void main(String[] args) {
+
+        String hello = "Hi there Nick.";
+        //Can be concatenated using + and +=
+        hello += " What are you upto?";
+        System.out.println(hello); //Hi there Nick. What are you upto?
+
+        // Equality operators do not check value of String itself. Just whether
+        // they reference the same instance.
+
+        String s1 = "I love";
+        s1 += " Java";
+        String s2 = "I";
+        s2 += " love Java";
+        if(s1 == s2){
+            System.out.println("TRUE shouldn't happen");}
+        else
+            System.out.println("Equality operator comes out as: NO MATCH");
+
+        if(s1.equals(s2)){
+            System.out.println("Equals method comes out as: MATCH");}
+        else
+            System.out.println("FALSE shouldn't happen");
+
+        // Interning a String
+        // When you intern a string, you'll get a reference to the same String instance
+        // Allows us to use the == operator
+        // Usually only preferred over Equals method with high volume comparisons
+
+        String s3 = s1.intern();
+        String s4 = s2.intern();
+        if(s3 == s4){
+            System.out.println("Intern method comes out as: MATCH");}
+        else
+            System.out.println("Most of the time you use Equals method however.");
+        /*
+        Converting Non-string Types to String
+         */
+        //Explicit
+        int iVal = 100;
+        String sVal = String.valueOf(iVal);
+        System.out.println(sVal);
+
+        //Implicit
+        int i = 2, j = 3;
+        int result1 = i * j;
+        String output = i + " * " + j + " = " + result1;
+        System.out.println(output);
+    }
+}
+
+
+

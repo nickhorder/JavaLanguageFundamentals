@@ -1,0 +1,104 @@
+package com.experian.dcm.pluralsight.nickhorder.gettingstartedinjava11;
+
+public class LoopingAndArrays {
+    public static void main(String[] args) {
+    /*
+    Five Loops
+    - While loop
+    - Do-while loop
+    - For loop
+    - Arrays
+    - For-each loop, simplifies the task of walking through an Array
+    */
+    /*
+    WHILE LOOP
+    while (condition)
+    statement;
+    It's possible that if the condition is false, the loop will never run.
+     */
+        int someValue = 4;
+        int factorial = 1;
+        while(someValue > 1) { //someValue has value of 4, so true, so go into body of loop
+            factorial *= someValue; // 1 * 4 is 4, store it back into factorial
+            someValue--;       // reduce someValue by 1, so go from 4 to 3
+        }
+        System.out.println(factorial);
+
+        // Total flow is:
+        // 1 * 4 = 4
+        // 4 * 3 = 12
+        // 12 * 2 = 24
+        // 12 * 1 - don't run - someValue no longer > 1. Outcome is 24.
+
+   /* DO-WHILE LOOP
+   Similar to While, however condition is checked at the end of the loop.
+   Because it's checked at the end of the loop, the loop body always runs at
+   least once.
+    */
+        long iVal = 5;
+        do {
+            System.out.print(iVal + " * 2 = ");
+            iVal *= 2;
+            System.out.println(iVal);
+        } while(iVal < 25);
+    /*
+    5 * 2 = 10
+    10 * 2 = 20
+    20 * 2 = 40
+    What happens when iVal is 40? Well it still hits the loop for one time.
+    The outcome is 80, then it fails on the while condition (80 < 25 false)
+     */
+
+    /* FOR LOOP
+    Condition checked at the start. So again, possible that the loop may not run.
+    Over the While loop, it provides simplified notation for loop control values.
+     */
+        for(int seqNum = 1; seqNum <= 10; seqNum += 2) //when seqNum is less/equal to 10, we'll work the loop
+            System.out.println(seqNum);
+    /* This way we make clear what our initialisation work is, what our control statement
+    is, and what work we want to do at the end of the loop. Note that the loop starts with
+    the value of i itself.
+
+     */
+    /* ARRAYS
+    Arrays allow us to provide an ordered collection of elements.
+    float[] theVals = new float[3]; it has 3 elements, we can reference it by
+    using theVals.
+    Java uses a range from 0 to number-of-elements minus 1. Here it's 0,1,2.
+    theVals[0] = 10.0f; would mean element 0 is 10.0f, and so on.
+    The Array length here is 3.
+     */
+        float[] theVals = new float[3];
+        theVals[0] = 10f;
+        theVals[1] = 20f;
+        theVals[2] = 15f;
+        float sum = 0f; //variable to hold sum
+        for(int index = 0; index < theVals.length; index++) //loop to get each element
+            sum += theVals[index];
+        System.out.println(sum);
+        // Starts. index value 0 is less than 3 (array length). True
+        // 1+0=1 new index value. We then add theVals[0] to sum, 0+10=10
+        // index value 1 is less than 3. True
+        // 1+1=2 new index value. We then add theVals[1] to sum, 10+20=30
+        // index value 2 is less than 3. True
+        // 1+2=3 new index value. We then add theVals[2] to sum, 30+15=45
+        // index value 3 is NOT less than 3. False. Exit loop
+        // print sum (45)
+
+        // Alternative "in stream"
+
+        float[] theVals2 = { 10f, 20f, 15f };
+        float sum2 = 0f; //variable to hold sum
+        for(int index = 0; index < theVals2.length; index++) //loop to get each element
+            sum2 += theVals2[index];
+        System.out.println(sum2);
+
+        // FOR-EACH
+        double[] bankBalances = {1570, 2030, 16400};
+        double totalBalance = 0;
+        for(double arrayElement : bankBalances) //For each element within bankBalances array
+            totalBalance += arrayElement;
+        System.out.println(totalBalance);
+    }
+}
+

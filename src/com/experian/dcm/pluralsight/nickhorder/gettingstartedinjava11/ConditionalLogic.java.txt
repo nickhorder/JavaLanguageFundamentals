@@ -1,0 +1,164 @@
+package com.experian.dcm.pluralsight.nickhorder.gettingstartedinjava11;
+
+public class ConditionalLogic {
+    public static void main(String[] args) {
+        /*
+    CONDITIONAL ASSIGNMENT
+    Return a value based on the result of a condition
+    result = condition ? true-value : false=value ;
+         */
+        int value1 = 7;
+        int value2 = 5;
+        int maxValue = value1 > value2 ? value1 : value2;
+        System.out.println("Calculation result is " + maxValue); //value1
+
+        /*
+        IF-ELSE
+         */
+
+        int value3 = 10;
+        int value4 = 14;
+        if (value3 > value4)
+            System.out.println("Value 3 is bigger");
+            //note that else is optional
+        else
+            System.out.println("Value 3 is NOT bigger");
+
+        /*
+        Chaining if-else
+        - Evaluated in order top to bottom
+        - First to test true, is executed
+         */
+
+        int value5 = 10;
+        int value6 = 40;
+        if (value5 > value6)
+            System.out.println("value5 is bigger");
+        else if (value5 < value6)
+            System.out.println("value6 is bigger");
+        else
+            System.out.println("value 5 and value 6 are equal");
+
+        /*
+        Calcengine Example
+         */
+        double balance = 1000.00d;
+        double payment = 225;
+        double result = 0.00d;
+        char opCode = 'm';
+
+        if (payment == 0 || payment >200 )
+            System.out.println("Payment amount invalid. Must be greater " +
+                    "than 0 and less than 200. You entered " + payment);
+        else{
+            if (payment >=0 && payment <200 && opCode == 'a')
+                System.out.println(balance + payment);
+            else if (payment >=0 && payment <200 && opCode == 's')
+                System.out.println(balance - payment);
+            else if (payment >=0 && payment <200 && opCode == 'm')
+                System.out.println(balance * payment);
+            else if (payment >=0 && payment <200 && opCode == 'd')
+                System.out.println(balance / payment);
+            else if (payment >=0 && payment <200)
+                System.out.println(opCode + " is not a valid Operator Code." +
+                        "Please enter either a,s,m or d (case sensitive)");
+        }
+
+
+        /*
+        STANDARD LOGICAL OPERATORS
+        Produce true/false result from two true or false values
+         */
+        // AND (&) example
+        int a = 20, b = 14, c = 5; // as long as type matches, can do on 1 line
+        if ( a > b & b > c) // resolves to TRUE if BOTH sides true
+            System.out.println("a is greater than c");
+        // OR (|)
+        // Exclusive or, aka XOR (^)
+        // Negation example (!)
+        boolean done = false;
+        if (! done)
+            System.out.println("Keep going!");
+        /*
+        CONDITIONAL LOGICAL OPERATORS
+        And &&
+        Or ||
+        The difference to the standard operators, they will only execute
+        the right side only when needed.
+        && executes right only when left is true
+        || executes right only when left is false
+         */
+
+        int students = 150;
+        int rooms = 0;
+        int maxperroom = 30;
+
+        if(rooms !=0 && students / rooms > maxperroom)
+            // Note that if you use a standard &, only if both conditions are true,
+            // will we still attempt to write out the "Too many" line. This is because
+            // both sides of the comparison always happen. So even though rooms =0
+            // came out false, we still attempt the division by 0
+
+            System.out.println("Too many students per room!!");
+        else
+            System.out.println("The amount of students is good.");
+        System.out.println("End of Program");
+    /*
+    BLOCK STATEMENTS
+    Groups multiple statements together, creating a compound statement.
+    Enclose statements in opening and closing brackets.
+     */
+        int potatoCount = 10, beansCount = 14;
+        final int diffcalc;
+        if (potatoCount > beansCount) {
+            diffcalc = potatoCount - beansCount;
+            System.out.println("You've got " + diffcalc + " more potatoes than beans");
+        } //An if only runs the line that follows it.
+        // The brackets allow the diffcalc to be included with the if.
+        // without the brackets, the code will not compile.
+        else {
+            diffcalc = beansCount - potatoCount;
+            System.out.println("You've got " + diffcalc + " fewer potatoes than beans");
+        } //Again, the else will only run the line that follows it.
+    /*
+    We have a concept of Variable Scope within block statements. Code can only be
+    used by the block it relates to.
+    back to calcengine..
+     */
+
+    /*
+    SWITCH STATEMENT
+    Familiar with this from C#, in fact a lot of these concepts tbh.
+    - Can only be used with certain datatypes. Byte,short,int,long,char
+    Nearly always end with a Break. There are some cases when you don't want to
+    however.
+     */
+
+        double bfholidayBalance = 25.0d;
+        double daysBooked = 5.0d;
+        double cfholidayBalance = 0.0d;
+        char operatorCode = 's';
+
+        switch(operatorCode){
+            case 'a':
+                cfholidayBalance = bfholidayBalance + daysBooked;
+                break;
+            case 's':
+                cfholidayBalance = bfholidayBalance - daysBooked;
+                break;
+            case 'm':
+                cfholidayBalance = bfholidayBalance * daysBooked;
+                break;
+            case 'd':
+                cfholidayBalance = daysBooked != 0 ? bfholidayBalance / daysBooked : 0.0d;
+                break;
+            default:
+                System.out.println("Invalid opCode: " + operatorCode);
+                cfholidayBalance = 0.0d;
+                break;
+        }
+        System.out.println(cfholidayBalance);
+
+    }
+}
+

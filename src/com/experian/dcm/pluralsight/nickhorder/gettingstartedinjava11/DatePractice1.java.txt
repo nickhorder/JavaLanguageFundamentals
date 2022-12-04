@@ -1,0 +1,70 @@
+package com.experian.dcm.pluralsight.nickhorder.gettingstartedinjava11;
+
+import java.time.LocalDate;
+import java.util.Scanner;
+
+public class DatePractice1 {
+
+    public static void main(String[] args) {
+    }
+        static char userFunction () {
+            System.out.println("Do you want to Add or Subtract days?:");
+            Scanner scanner = new Scanner(System.in);
+            String userFunction = scanner.nextLine();
+            char opCode = userFunction.charAt(0);
+            return (opCode);
+        }
+
+    static double checkOpCode(char opCode) {
+        switch (opCode) {
+            case 'a':
+                getStartDate();
+                break;
+            case 's':
+                getStartDate();
+                break;
+            default:
+                System.out.println(opCode + " is invalid. Try again.");
+                userFunction();
+                break;
+
+        }
+        return opCode;
+    }
+
+    static String getStartDate() {
+        System.out.println("Enter a date:");
+        Scanner scanner = new Scanner(System.in);
+        String userInput = scanner.nextLine();
+        //    String startDate = LocalDate.parse(userInput);
+        return(userInput);
+    }
+
+    static String userDays() {
+        System.out.println("How many days are you adding or subtracting?:");
+        Scanner scanner = new Scanner(System.in);
+        String userDays = scanner.nextLine();
+        return(userDays);
+    }
+
+    static String calculateNewDate(String startDate, String userDays, char opCode){
+        LocalDate newDate = null;
+        String output = null;
+        switch (opCode) {
+            case 'a':
+                newDate = LocalDate.parse(startDate);
+                output = String.format("%s plus %d days is %s", startDate,userDays,newDate );
+                break;
+            case 's':
+                newDate = LocalDate.parse(startDate + userDays);
+                break;
+            default:
+                System.out.println("something unexpected happened in calculateNewDate");
+                break;
+        }
+        return output;
+    }
+
+
+}
+

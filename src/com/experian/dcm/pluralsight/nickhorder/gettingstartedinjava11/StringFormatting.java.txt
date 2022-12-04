@@ -1,0 +1,110 @@
+package com.experian.dcm.pluralsight.nickhorder.gettingstartedinjava11;
+
+import java.util.Formatter;
+// STRING FORMATTING //
+/*
+String formatting allows us to use "Format Specifiers" allow us to paint a picture of what we
+want the desired result to look like.
+Can control many aspects of appearance. Number of methods that support string formatting.
+- String.format
+- System.out.printf
+- Formatter.format
+ */
+public class StringFormatting {
+    public static void main(String[] args) {
+
+        //    "My dogs are 17, 15, 8 and 6 years old"
+        int barry = 57, colin = 15, percy = 7, tonicha = 4;
+        // Concatenation would build a large statement that doesn't look great.
+        String s1 = String.format(
+                "My dogs are %d, %d, %d, and %d years old",
+                barry,colin,percy,tonicha
+        );
+        System.out.println(s1);
+
+        double avgAge = (barry + colin + percy + tonicha)/4.0;
+        String s2 = String.format(
+                "The average age is %.1f years", avgAge); //Will write out to 1 dec place
+        //
+        // %
+        // [argument index] Control over what format specifiers match up with which data values
+        // [flags] Customise appearance of value
+        // [width] Minimum characters to display (space padded, right justified)
+        // [precision] number of decimal places
+        // [conversion]
+        System.out.println(s2);
+
+        //CONVERSION TYPES
+
+        // c (character)
+        // d (Decimal conv to Int) 32 to 32
+        // x X (Hex conv to Int) 32 to 20
+        // f (Decimal conv to FP) 123.0 to 123.000000
+        // e E (Scientific to FP) 123.0 to 1.230000e+02
+        // s (String to General) "Hello" to Hello
+
+        //FLAG TYPES
+
+        // # Include radix. Before the conversion type, i.e "%#x"
+        // 32 converted to hex is 20, however with the above, it would show 0x20
+
+        // 0 (Zero-padding)
+        // - (Left justify)
+
+        int w = 5, x = 235, y = 481, z = 12;
+        String s3 = String.format("W:%d X:%d", w, x); // W:5 X:235
+        String s4 = String.format("Y:%d Z:%d", y, z); // Y:481 Z:12
+        System.out.println(s3);
+        System.out.println(s4);
+        String s5 = String.format("W:%04d X:%04d", w, x); // W:0005 X:0235
+        String s6 = String.format("Y:%04d Z:%04d", y, z); // Y:0481 Z:0012
+        System.out.println(s5);
+        System.out.println(s6);
+        String s7 = String.format("W:%-4d X:%-4d", w, x); // W:5    X:235
+        String s8 = String.format("Y:%-4d Z:%-4d", y, z); // Y:481  Z:12
+        System.out.println(s7);
+        System.out.println(s8);
+
+        // , (Include group separator)
+
+        int iVal = 1234567;
+        double dVal = 1234567.327532;
+        String s9 = String.format("%,d", iVal); //1,234,567
+        String s10 = String.format("%,.2f", dVal); //1,234,567.32
+        System.out.println(s10);
+
+        // space (leading space when positive number)
+        // + (always show sign)
+
+        int iPosVal = 123, iNegVal = -456;
+        String s11 = String.format("% d", iPosVal); //Space at start to line up with neg val
+        String s12 = String.format("% d", iNegVal); //Minus val retained
+        // you can also change the space to have +, to create a positive sign for 123
+        // Or ( which creates (456)
+        System.out.println(s11); // 123
+        System.out.println(s12); //-456
+
+        int iVal2 = 4623590;
+        double dVal2 = -1893724.327592;
+        String s13 = String.format("% d", iVal2); //  4623590
+        String s14 = String.format("%.2f", dVal2);// -1893724.33
+        System.out.println(s13);
+        System.out.println(s14);
+
+        //ARGUMENT INDEX
+        // If not specified, corresponds sequentially to argument.
+        // index$ gives an index of argument to use (1-based)
+        // < I want to use the same argument as the previous format specifier
+
+        int valA = 100, valB = 200, valC = 300;
+        //traditional format:
+        String s15 = String.format("%d %d %d", valA, valB, valC); //100,200,300
+        //Argument Index format:
+        String s16 = String.format("%3$d %1$d %2$d", valA, valB, valC); //300,100,200
+        String s17 = String.format("%3$d %<d %2$d", valA, valB, valC); //300,300,200
+        System.out.println(s15);
+        System.out.println(s16);
+        System.out.println(s17);
+    }
+}
+

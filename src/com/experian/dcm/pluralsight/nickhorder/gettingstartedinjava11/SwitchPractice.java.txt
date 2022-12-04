@@ -1,0 +1,115 @@
+package com.experian.dcm.pluralsight.nickhorder.gettingstartedinjava11;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+import static java.lang.System.out;
+
+/*
+Further practice on Switch statements. After starting this, I realised that you can't
+use conditional logic within a Switch statement, so kind of hashed it and it's not
+efficiently written code, but it was good practice.
+ */
+
+public class SwitchPractice {
+    public static void main(String[] args)
+            throws IOException {
+        BufferedReader reader = new BufferedReader(
+                new InputStreamReader(System.in));
+
+        out.println("What's the current number of players?");
+        double playersCurrent = Integer.parseInt(reader.readLine());
+
+        out.println("What is the maximum number of players we can have" +
+                " per session?");
+        double playersLimit = Integer.parseInt(reader.readLine());
+
+        out.println("Thank you. How many players are you planning to " +
+                "ask to leave badminton because, quite frankly, they just " +
+                "aren't good enough?");
+        double playersBadRemove = Integer.parseInt(reader.readLine());
+
+        out.println("And how many new players do you have lined up to" +
+                " join?");
+        double playersAddNew = Integer.parseInt(reader.readLine());
+
+        //Calculate the new total of players based on user input
+        double newProposedPlayers = (playersCurrent - playersBadRemove + playersAddNew);
+        //Calculate the spare capacity we have
+        double spareCapacity = playersLimit - newProposedPlayers;
+
+        // Call playerDecisionMethod. Note how we capture the return as "pdcReturned"
+        int pdcReturned = playerDecisionCodeMethod(playersAddNew, newProposedPlayers,
+                playersLimit, playersCurrent, playersBadRemove);
+
+        // Call playerCalculationMethod
+        String advice  = playerCalculationMethod(pdcReturned, newProposedPlayers,
+                playersLimit, spareCapacity);
+
+        System.out.println(advice);
+
+    }   //Main ends here
+
+    //Start of playerDecisionCodeMethod
+    static int playerDecisionCodeMethod ( double playersAddNew,
+                                          double newProposedPlayers,
+                                          double playersLimit,
+                                          double playersCurrent,
+                                          double playersBadRemove){
+        //Set a default variable for playerDecisionCode
+        int playerDecisionCode = 0;
+
+        //New player total is more than player limit
+        if (newProposedPlayers > playersLimit)
+            playerDecisionCode = 1;
+
+        //New player total is less than player limit
+        if (newProposedPlayers < playersLimit)
+            playerDecisionCode = 2;
+
+        //New player total is equal to player limit
+        if (newProposedPlayers == playersLimit)
+            playerDecisionCode = 3;
+
+        //User gave negative values at some point
+        if (playersCurrent < 0 | playersLimit < 0 |
+                playersBadRemove < 0 | playersAddNew < 0)
+            playerDecisionCode = 4;
+        return playerDecisionCode;
+    }
+
+
+    //playerDecisionMethod ends here
+
+
+
+    static String playerCalculationMethod(int pdcReturned, double newProposedPlayers,
+                                          double playersLimit, double spareCapacity) {
+        String advice = null;
+        switch (pdcReturned) {
+            case 1:
+                advice = ("Right. The new proposed amount of players is " + newProposedPlayers +
+                        " which is over the limit you set of " + playersLimit + "." + "\n" + "Maybe reduce the amount of new players, or get " +
+                        "rid of more bad players, like that Nick Horder who doesn't play well" + "\n" +
+                        "from back of court.");
+                break;
+            case 2:
+                advice = ("The new total of players is " + newProposedPlayers + "." +
+                        " This means you can take on " + spareCapacity + " more players if you wanted to.");
+                break;
+            case 3:
+                advice = ("Your new total of players is " + newProposedPlayers + " which is" +
+                        " exactly at the limit you set. Well done on judging it so well.");
+                break;
+            case 4:
+                advice = ("You gave negative values at some point in your input?" +
+                        " Why? Do it again.");
+                break;
+            default:
+                advice = ("DSPV99");
+                break;
+        }
+        return advice;
+    }
+}
