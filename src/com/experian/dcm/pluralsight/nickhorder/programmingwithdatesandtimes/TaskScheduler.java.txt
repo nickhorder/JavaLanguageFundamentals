@@ -1,0 +1,37 @@
+package com.experian.dcm.pluralsight.nickhorder.programmingwithdatesandtimes;
+
+import jdk.jfr.Event;
+
+import java.time.*;
+import java.time.temporal.TemporalAdjusters;
+import java.util.List;
+
+public class TaskScheduler {
+    public static void main(String[] args){
+
+        Clock testClock = Clock.fixed(Instant.EPOCH, ZoneOffset.UTC);
+
+        //Create a calendar
+        SchedulerCalendar calendar = new SchedulerCalendar();
+
+        //Add some tasks to the calendar
+        calendar.addTask("Answer urgent email", 1, 0);
+
+        //Add some work periods to the calendar
+        LocalDate clockDate = LocalDate.now(testClock);
+        LocalDate mondayStart = clockDate.with(TemporalAdjusters.nextOrSame(DayOfWeek.MONDAY));
+
+        List<WorkPeriod> periods = WorkPeriods.generateWorkPeriods(mondayStart,3);
+        calendar.addWorkPeriods(periods);
+
+        //Add an event to the calendar
+        ZonedDateTime meetingStartTime = ZonedDateTime.of(
+                mondayStart, LocalTime.of(7,30), ZoneId.of("America/New_York"));
+        Event nyPlanningMeeting = Event.of(meetingStartTime, Duration.ofHours(1),"New York Planning");
+
+
+
+
+
+    }
+}
